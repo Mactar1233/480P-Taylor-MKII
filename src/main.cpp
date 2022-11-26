@@ -1,7 +1,7 @@
 #include "main.h"
 #include "pros/colors.h"
 #include "pros/llemu.hpp"
-
+#include "Subsystems.hpp"
 
 /////
 // For instalattion, upgrading, documentations and tutorials, check out website!
@@ -13,14 +13,14 @@
 Drive chassis (
   // Left Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  {11, 12, -13}
+  {-11, 12, -13}
 
   // Right Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  ,{-18, -19, 20} 
+  ,{18, -19, 20} 
 
   // IMU Port
-  ,1
+  ,2
 
   // Wheel Diameter (Remember, 4" wheels are actually 4.125!)
   //    (or tracking wheel diameter)
@@ -28,7 +28,7 @@ Drive chassis (
 
   // Cartridge RPM
   //   (or tick per rotation if using tracking wheels)
-  ,200
+  ,600
 
   // External Gear Ratio (MUST BE DECIMAL)
   //    (or gear ratio of tracking wheel)
@@ -68,7 +68,7 @@ void initialize() {
 
   // Configure your chassis controls
   chassis.toggle_modify_curve_with_controller(true); // Enables modifying the controller curve with buttons on the joysticks
-  chassis.set_active_brake(0); // Sets the active brake kP. We recommend 0.1.
+  chassis.set_active_brake(0.1); // Sets the active brake kP. We recommend 0.1.
   chassis.set_curve_default(0, 0); // Defaults for curve. If using tank, only the first parameter is used. (Comment this line out if you have an SD card!)  
   default_constants(); // Set the drive to your own constants from autons.cpp!
   exit_condition_defaults(); // Set the exit conditions to your own constants from autons.cpp!
@@ -91,7 +91,7 @@ void initialize() {
   // Initialize chassis and auton selector
   chassis.initialize();
   ez::as::initialize();
-  pros::lcd::set_background_color(100,199,199);
+  pros::lcd::set_background_color(221,160,221);
   
 }
 
@@ -165,6 +165,8 @@ void opcontrol() {
   while (true) {
 
     chassis.tank(); // Tank control
+    Catacontrol();
+    intakeControl();
     // chassis.arcade_standard(ez::SPLIT); // Standard split arcade
     // chassis.arcade_standard(ez::SINGLE); // Standard single arcade
     // chassis.arcade_flipped(ez::SPLIT); // Flipped split arcade

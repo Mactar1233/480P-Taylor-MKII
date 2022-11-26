@@ -85,6 +85,7 @@ void drive_example() {
 
   chassis.set_drive_pid(-12, DRIVE_SPEED);
   chassis.wait_drive();
+  autoncata(Shooting);
 }
 
 
