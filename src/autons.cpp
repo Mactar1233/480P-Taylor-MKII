@@ -1,4 +1,8 @@
+#include "autons.hpp"
+#include "EZ-Template/drive/drive.hpp"
+#include "Subsystems.hpp"
 #include "main.h"
+#include "pros/rtos.hpp"
 
 
 /////
@@ -85,7 +89,6 @@ void drive_example() {
 
   chassis.set_drive_pid(-12, DRIVE_SPEED);
   chassis.wait_drive();
-  autoncata(Shooting);
 }
 
 
@@ -249,3 +252,20 @@ void interfered_example() {
 // . . .
 // Make your own autonomous functions here!
 // . . .
+void leftAuton(){
+  chassis.set_drive_pid(-6, DRIVE_SPEED);
+  setIntake(-6000);
+  pros::delay(1500);
+  setIntake(0);
+  chassis.set_drive_pid(13, DRIVE_SPEED);
+  chassis.wait_drive();
+  chassis.set_turn_pid(90, DRIVE_SPEED);
+  chassis.wait_drive();
+  chassis.set_drive_pid(35,DRIVE_SPEED );
+  chassis.wait_drive();
+  chassis.set_turn_pid(110, DRIVE_SPEED);
+  chassis.wait_drive();
+  autoncatashoot();
+  autoncataprime();
+
+}

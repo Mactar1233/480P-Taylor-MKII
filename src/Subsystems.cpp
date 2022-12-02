@@ -1,8 +1,10 @@
 #include "EZ-Template/util.hpp"
+#include "Subsystems.hpp"
 #include "pros/adi.hpp"
 #include "pros/misc.h"
 #include "pros/motors.h"
 #include "pros/motors.hpp"
+#include "pros/rtos.hpp"
 pros::Motor catapult(16, pros::E_MOTOR_GEARSET_36, true, pros::E_MOTOR_ENCODER_DEGREES);
 pros::Motor Intake(15, pros::E_MOTOR_GEARSET_36, false, pros::E_MOTOR_ENCODER_DEGREES);
 pros::ADIDigitalIn catalimit('H');
@@ -31,25 +33,37 @@ Intake.move_voltage(0);
 }else if(intakeToggle == true && catalimit.get_value() == false){
     Intake.move_voltage(0);
 }
+}
 
-}
-enum State{priming = false , Shooting = true};
-void autoncata(State state){
-if (state == priming){
-    if (catalimit.get_value() == true) {
-        catapult.move_voltage(0);
-    }else if (catalimit.get_value() == false) {
-        catapult.move_voltage(12000);
-        Intake.move_voltage(0);
+void autoncatashoot(){
+    while (true) {
+    if(catalimit.get_value() == true){
+        catapult.move_velocity(12000);
+    }else if(catalimit.get_value() == false) {
+    catapult.move_velocity(0);
+    break;
+    }
     }
 }
-if (state == Shooting){
-     if (catalimit.get_value() == true) {
-        catapult.move_voltage(12000);
-    }else if (catalimit.get_value() == false) {
-        catapult.move_voltage(12000);
-        Intake.move_voltage(0);
-        state = priming;
+void autoncataprime(){
+    while (true) {
+    if(catalimit.get_value() == true){
+        catapult.move_velocity(0);
+        break;
+    }else if(catalimit.get_value() == false) {
+    catapult.move_velocity(12000);
+    }
     }
 }
+void autoncata(){
+    while (true) {
+     autoncatashoot();
+    pros::delay(100);
+    autoncataprime();
+    break;
+    }
 }
+void setIntake(int speed){
+    Intake.move_voltage(speed);
+}
+

@@ -1,7 +1,7 @@
 #pragma once
 void Catacontrol();
 void intakeControl();
-void AutonCata(bool State);
-enum State{priming = false , Shooting = true};
-void autoncata(State state);
-
+void autoncata();
+void autoncataprime();
+void autoncatashoot();
+void setIntake(int speed);
