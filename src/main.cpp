@@ -80,8 +80,8 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.add_autons({
-    Auton("Example Drive\n\nDrive forward and come back.", leftAuton),
-    Auton("Example Turn\n\nTurn 3 times.", turn_example),
+    Auton("Example Drive\n\nShoot preloads into the goal and spins roller", leftAuton),
+    Auton("Shoot just one\n\nShoots just preloads", shootpreload),
     Auton("Drive and Turn\n\nDrive forward, turn, come back. ", drive_and_turn),
     Auton("Drive and Turn\n\nSlow down during drive.", wait_until_change_speed),
     Auton("Swing Example\n\nSwing, drive, swing.", swing_example),
@@ -168,6 +168,7 @@ void opcontrol() {
     chassis.tank(); // Tank control
     Catacontrol();
     intakeControl();
+    endgame();
     // chassis.arcade_standard(ez::SPLIT); // Standard split arcade
     // chassis.arcade_standard(ez::SINGLE); // Standard single arcade
     // chassis.arcade_flipped(ez::SPLIT); // Flipped split arcade

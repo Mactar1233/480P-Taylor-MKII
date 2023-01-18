@@ -269,3 +269,8 @@ void leftAuton(){
   autoncataprime();
 
 }
+
+void shootpreload(){
+  autoncatashoot();
+  autoncataprime();
+}
