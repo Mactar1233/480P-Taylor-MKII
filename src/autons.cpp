@@ -265,8 +265,7 @@ void leftAuton(){
   chassis.wait_drive();
   chassis.set_turn_pid(110, DRIVE_SPEED);
   chassis.wait_drive();
-  autoncatashoot();
-  autoncataprime();
+  fire();
 
 }
 

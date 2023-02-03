@@ -14,11 +14,11 @@
 Drive chassis (
   // Left Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  {-11, 12, -13}
+  {11, -12, -13}
 
   // Right Chassis Ports (negative port will reverse it!)
   //   the first port is the sensored port (when trackers are not used!)
-  ,{18, -19, 20} 
+  ,{18, 19, -20} 
 
   // IMU Port
   ,2
@@ -93,6 +93,8 @@ void initialize() {
   chassis.initialize();
   ez::as::initialize();
   pros::lcd::set_background_color(221,160,221);
+  pros::Task cata_task(cata_task_fn);
+
   
 }
 
@@ -166,7 +168,7 @@ void opcontrol() {
   while (true) {
 
     chassis.tank(); // Tank control
-    Catacontrol();
+    drivercata();
     intakeControl();
     endgame();
     // chassis.arcade_standard(ez::SPLIT); // Standard split arcade

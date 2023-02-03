@@ -6,3 +6,6 @@ void autoncataprime();
 void autoncatashoot();
 void endgame();
 void setIntake(int speed);
+void drivercata();
+void cata_task_fn();
+void fire();
