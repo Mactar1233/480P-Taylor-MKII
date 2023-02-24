@@ -1,5 +1,6 @@
 #include "autons.hpp"
 #include "EZ-Template/drive/drive.hpp"
+#include "EZ-Template/util.hpp"
 #include "Subsystems.hpp"
 #include "main.h"
 #include "pros/rtos.hpp"
@@ -266,10 +267,143 @@ void leftAuton(){
   chassis.set_turn_pid(110, DRIVE_SPEED);
   chassis.wait_drive();
   fire();
+  chassis.set_turn_pid(148, DRIVE_SPEED);
+  chassis.wait_drive();
+  setIntake(12000);
+  chassis.set_drive_pid(-19, DRIVE_SPEED);
+  pros::delay(2600);
+  chassis.set_drive_pid(15, DRIVE_SPEED);
+  chassis.wait_drive();
+  chassis.set_turn_pid(110, DRIVE_SPEED);
+  chassis.wait_drive();
+  fire();
 
 }
 
 void shootpreload(){
   autoncatashoot();
   autoncataprime();
+}
+
+void leftAutonBoosted(){
+    chassis.set_drive_pid(-6, DRIVE_SPEED);
+  setIntake(-6000);
+  pros::delay(1500);
+  setIntake(0);
+  chassis.set_drive_pid(13, DRIVE_SPEED);
+  chassis.wait_drive();
+  chassis.set_turn_pid(-9, DRIVE_SPEED);
+  fire();
+  pros::delay(600);
+  chassis.set_drive_pid(-10, DRIVE_SPEED);
+  chassis.wait_drive();
+  chassis.set_turn_pid(-132, DRIVE_SPEED);
+  chassis.wait_drive();
+  setIntake(-12000);
+  chassis.set_drive_pid(-35, 90);
+  chassis.wait_drive();
+  setIntake(12000);
+  chassis.set_drive_pid(-17, 70);
+  chassis.wait_drive();
+  chassis.set_turn_pid(-32, DRIVE_SPEED);
+  chassis.wait_drive();
+  chassis.set_drive_pid(7, 40);
+  chassis.wait_drive();
+  
+  fire();
+}
+
+void rightauton(){
+  chassis.set_drive_pid(4, DRIVE_SPEED, true);
+  chassis.wait_drive();
+  chassis.set_turn_pid(90, DRIVE_SPEED);
+  chassis.wait_drive();
+  chassis.set_drive_pid(29, DRIVE_SPEED);
+  chassis.wait_drive();
+  chassis.set_turn_pid(0, DRIVE_SPEED);
+  chassis.wait_drive();
+   setIntake(-6000);
+  chassis.set_drive_pid(-5, DRIVE_SPEED, true);
+  chassis.wait_drive();
+  pros::delay(500);
+  setIntake(0);
+  chassis.set_drive_pid(5, DRIVE_SPEED, true);
+  chassis.wait_drive();
+}
+void leftAutonRoller(){
+  chassis.set_drive_pid(-6, DRIVE_SPEED);
+  setIntake(-6000);
+  pros::delay(1500);
+  setIntake(0);
+  
+
+}
+
+void boostedright(){
+  chassis.set_drive_pid(22, DRIVE_SPEED);
+  chassis.wait_drive();
+  chassis.set_turn_pid(23, DRIVE_SPEED);
+  chassis.wait_drive();
+  fire();
+  pros::delay(1000);
+  chassis.set_turn_pid(0, DRIVE_SPEED);
+  chassis.wait_drive();
+  chassis.set_drive_pid(-22, DRIVE_SPEED);
+  chassis.wait_drive();
+    chassis.set_drive_pid(4, DRIVE_SPEED, true);
+  chassis.wait_drive();
+  chassis.set_turn_pid(90, DRIVE_SPEED);
+  chassis.wait_drive();
+  chassis.set_drive_pid(29, DRIVE_SPEED);
+  chassis.wait_drive();
+  chassis.set_turn_pid(0, DRIVE_SPEED);
+  chassis.wait_drive();
+   setIntake(-6000);
+  chassis.set_drive_pid(-10, DRIVE_SPEED, true);
+  chassis.wait_drive();
+  pros::delay(500);
+  setIntake(0);
+  chassis.set_drive_pid(10, DRIVE_SPEED, true);
+  chassis.wait_drive();
+}
+
+void skills(){
+  chassis.set_drive_pid(-2,DRIVE_SPEED); //go to roller
+  chassis.wait_drive();
+  setIntake(12000);//run roller
+  pros::delay(350);//delay to spin
+  setIntake(0);//stop running roller
+  chassis.set_drive_pid(5,DRIVE_SPEED);//back off
+  chassis.wait_drive();
+  chassis.set_turn_pid(125,DRIVE_SPEED);//turn to disc
+  chassis.wait_drive();
+  chassis.set_drive_pid(-25,60,true);//drive into disc
+  setIntake(12000);//intake
+  pros::delay(1800);
+  setIntake(0);//stop intake
+  chassis.wait_drive();
+  chassis.set_turn_pid(90,DRIVE_SPEED);//turn to roller
+  chassis.wait_drive();
+  chassis.set_drive_pid(-8,90);
+  chassis.wait_drive();
+  setIntake(12000);//intake
+  pros::delay(350);
+  setIntake(0);//stop intake
+  chassis.set_drive_pid(3,DRIVE_SPEED);//back off
+  chassis.wait_drive();
+  chassis.set_turn_pid(0,DRIVE_SPEED);//turn to goal
+  chassis.wait_drive();
+  chassis.set_drive_pid(60,DRIVE_SPEED);//drive to goal
+  chassis.wait_drive();
+  chassis.set_turn_pid(12,DRIVE_SPEED);//turn to goal
+  chassis.wait_drive();
+  fire();
+  chassis.set_drive_pid(10,DRIVE_SPEED);
+  chassis.set_swing_pid(ez::LEFT_SWING, -90, 80);
+  chassis.wait_drive();
+  chassis.set_drive_pid(-25, 30);
+  setIntake(12000);
+  pros::delay(4000);
+   chassis.wait_drive();
+  chassis.set_drive_pid(25, 90);
 }

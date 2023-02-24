@@ -80,10 +80,11 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.add_autons({
-    Auton("Example Drive\n\nShoot preloads into the goal and spins roller", leftAuton),
+    Auton("Autonomous\n\nSkills", skills),
+    //Auton("left Auto LG\n\nShoot preloads into the goal and spins roller", boostedright),
     Auton("Shoot just one\n\nShoots just preloads", shootpreload),
-    Auton("Drive and Turn\n\nDrive forward, turn, come back. ", drive_and_turn),
-    Auton("Drive and Turn\n\nSlow down during drive.", wait_until_change_speed),
+    Auton("Right Auto\n\n shoots roller on right ", rightauton),
+    Auton("Left Auto R\n\n scores roller .", leftAutonRoller),
     Auton("Swing Example\n\nSwing, drive, swing.", swing_example),
     Auton("Combine all 3 movements", combining_movements),
     Auton("Interference\n\nAfter driving forward, robot performs differently if interfered or not.", interfered_example),

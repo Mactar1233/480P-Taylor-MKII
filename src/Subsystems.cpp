@@ -9,7 +9,6 @@ pros::Motor catapult(10, pros::E_MOTOR_GEARSET_36, true, pros::E_MOTOR_ENCODER_D
 pros::Motor Intake(1, pros::E_MOTOR_GEARSET_06, false, pros::E_MOTOR_ENCODER_DEGREES);
 pros::ADIDigitalIn catalimit('H');
 pros::ADIDigitalOut endgamerelease ('G');
-bool endgametoggle = false;
 bool intakeToggle = false;
 bool cata_override = false;
 bool state = true;
